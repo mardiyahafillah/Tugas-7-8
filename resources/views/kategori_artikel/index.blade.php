@@ -7,35 +7,33 @@
             <div class="card">
                 <div class="card-header">Kategori Artikel</div>
                 <div class="card-body">
-                    <a href="{!! route('kategori_artikel.create') !!}" class="btn btn-danger">Tambah Data</a>
+                <a href="{!!route('kategori_artikel.create')!!}">Tambah Data</a>
                 <table class="table table-bordered">
-                    <thead class="bg-warning">
+                    <thead class="bg-danger">
                         <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Nama</th>
                         <th scope="col">User_id</th>
-                        <th scope="col">Create</th>
                         <th scope="col">Aksi</th>
                         </tr>
-                     </thead>
+                    </thead>
                     <tbody>
-
-                        @foreach( $KategoriArtikel as $item)
+                        @foreach( $kategori_artikel as $item)
                         <tr>
                         <td>{!! $item->id !!}</td>
                         <td>{!! $item->nama !!}</td>
                         <td>{!! $item->users_id !!}</td>
-                        <td>{!! $item->created_at->format('d/m/Y H:i:s')!!}</td>
+                        <td><a href="{!!route('kategori_artikel.show',[$item->id])!!}">Lihat</a></td>
+                        <td><a href="{!! route('kategori_artikel.edit',[$item->id]) !!}" class="btn btn-primary">edit</a></td>
+
                         <td>
-                         <a href="{!! route('kategori_artikel.show',[$item->id]) !!}" class="btn btn-success">Lihat</a>
-                        </td>
+								{!! Form::open(['route' => ['kategori_artikel.destroy',$item->id], 'method' => 'delete']); !!}
+					            {!! Form::submit('Hapus',['class'=>'btn btn-danger']); !!}
+					            {!! Form::close() !!}
+							</td>
+                    
                         </tr>
-                       @endforeach
+                        @endforeach
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-@endsection
+		@endsection
